@@ -7,16 +7,34 @@ import numpy as np
 import math as m
 
 samplerate = 1000
-
-k = np.linspace(0, 50, samplerate) #Wavenumber of the lattice vibration
 omega = np.zeros((samplerate, 1))
 a = 1
-b = 1 #Constants to use in the dispersion relation
+b = 2 #Constants to use in the dispersion relation
 c = 1
 
-for n in range(0, k.size):
-    omega[n] = m.sqrt((a*(m.sin(2*c*k[n]))**2)+b*(m.sin(c*k[n]))**2)#Dispersion relation
-#print(k, omega)
 
-plt.plot(k, omega)
+
+
+def relationPlotter(a, b, c):
+    k = np.linspace(0, 20, samplerate) #Wavenumber of the lattice vibration
+    for n in range(0, k.size):
+        omega[n] = m.sqrt((a*(m.sin(2*c*k[n]))**2)+b*(m.sin(c*k[n]))**2)#Dispersion relation
+    #print(k, omega)
+
+    plt.plot(k, omega)
+
+
+for a in range(0, 3): #Used to test the effects of varying the constants
+   relationPlotter(a,b,c)
+
+#relationPlotter(a,b,c)
+
+plt.figure()
+
+for b in range(0, 3): #Used to test the effects of varying the constants
+   relationPlotter(a,b,c)
+
+#relationPlotter(a,b,c)
+
+#plt.figure()
 plt.show()
